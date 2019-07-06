@@ -4,6 +4,13 @@
 // https://nimiq.github.io/hub/quick-start
 
 
+// create a dom container for nimipay
+const nimipayDiv = document.getElementById('nimipay');
+if (nimipayDiv === null) { 
+  let div = document.createElement('div');
+  div.setAttribute("id", "nimipay");
+  document.body.appendChild(div);
+}
 
 
 // Initialize the Nimiq Hub API
