@@ -1,0 +1,286 @@
+<!doctype html>
+
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie= edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Nimipay - Simple and Flexible Payments Gateway</title>
+
+    <link rel="icon" href="favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Work Sans', 'Arial', 'Helvetica', sans-serif;
+        padding:10px;
+      }
+
+      a, a:visited {
+        color: rgb(0, 0, 238);
+      }
+
+      .content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding-top: 5px;
+      }
+
+      #header-left-link {
+        float:left;
+        top:15px;
+        position:fixed;
+      }
+
+      @media screen and (max-width: 900px) {
+        #header-left-link {
+          float:left;
+          position:absolute;
+        }
+      }
+
+      .logo-wordmark {
+        float:left;
+        font-size:14px;
+        padding-left:8px;
+        padding-top:6px;
+        color:#636363;
+        letter-spacing:1px;
+      }
+
+      h2 {
+        line-height: 140%;
+      }
+
+      .my-code {
+        font-family: "SF Mono", "Monaco", "Andale Mono", "Lucida Console", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+        color:#2AAB51;
+        font-size:14px;
+        white-space: nowrap;
+      }
+
+      .my-code-container {
+        max-width:100%;
+        overflow-x: auto;
+        text-align:left;
+        padding:15px;
+        background-color:rgb(247, 247, 247);
+        padding-top: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+      
+    </style>
+  </head>
+<body>
+  <div class="content">
+
+    <div id="header-left-link">
+      <img src="img/logo.png" width="30" style="float:left;">
+      <div class="logo-wordmark">
+        Nimipay
+      </div>
+    </div>
+
+    <div style="height:110px;"></div>
+    
+
+    <div id="backup-div" style="max-width:580px;margin:0 auto;font-size:13px;text-align:center;line-height:150%;">
+      
+      <h2>Simple and Flexible Payments Gateway</h2>
+      Add Nimipay to any website and start accepting cryptocurrency, and indirectly - credit card payments, anonymously and effortlessly
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div style="padding:20px;border:1px solid #d2d2d2;max-width:390px;border-radius:5px;margin:0 auto;">
+        <a href="https://nimipay.com/img/nimiq-paypal-metamask-comparison.png" target="_blank"><img src="img/nimiq-paypal-metamask-comparison.png" style="max-width:100%;"></a>
+      </div>
+      
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <h2>Examples</h2>
+
+      Below are four examples showing different types of Nimipay integrations.
+      <br>
+      Try to open a wallet and buy some fortune cookies.
+      <br>
+      <br>
+      <br>
+      <br>
+      <br><br>
+      <div onclick="npWallet()" id="choose-address" class="np-button">Open My NIM Wallet</div>
+
+      <div class="my-code-container">
+        <span class="my-code">&lt;div onclick="npWallet()" class="np-btn"&gt;Open My NIM Wallet&lt;/div&gt;</span>
+      </div>
+      <br>
+      The above code will place a button on your website that will allow the user to open his or her NIM wallet or to create a new one.
+
+      <br><br>
+      <br><br>
+      <br>
+
+      <div class="np-product"><img src="img/fortune-cookie.jpg" style="width:100%;"></div>
+      Fortune Cookie (0.01$)
+
+      <div style="height:5px;"></div>
+
+      <div onclick="npAddItem()" class="np-button">Add to Cart</div>
+
+      <div class="my-code-container">
+        <span class="my-code">&lt;div onclick="npAddItem()" data:type="fortune_cookie" data:value="0.1" data:meta="" class="np-btn"&gt;Add to Cart&lt;/div&gt;</span>
+      </div>
+
+      <br>
+      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received.
+
+      <br><br>
+      <br><br>
+      <br>
+
+      <div class="np-product"><img src="img/fortune-cookie.jpg" style="width:100%;"></div>
+      Fortune Cookie (0.01$)
+
+      <div style="height:5px;"></div>
+
+      <div onclick="npAddItemCheckout()" class="np-button">Instant Buy</div>
+
+      <div class="my-code-container">
+        <span class="my-code">&lt;div onclick="npAddItemCheckout()" data:type="fortune_cookie" data:value="0.1" data:meta="instant" class="np-btn"&gt;Instant Buy&lt;/div&gt;</span>
+      </div>
+
+      <br>
+      Single invoice, instant pay. When clicked, it will open a Nimiq checkout screen with the new invoice to pay. The meta tag is optional. It can be used to pass additional data to the backend, e.g. item ID. For the above cookie example, invoice and item IDs are generated on the backend.
+
+      <br><br>
+      <br><br>
+      <br><br>
+
+      <div onclick="npDonate()" class="np-donate" title="Donate NIM">Donate <svg class="np-donate-logo" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><title>NIM</title><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
+
+      <div class="my-code-container">
+        <span class="my-code">&lt;div onclick="npDonate()" data:msg="Donation to Nimipay" class="np-btn"&gt;Donate&lt;/div&gt;</span>
+      </div>
+
+      <br>
+      Instant checkout screen without the invoice and UI. The user can choose a custom NIM value and then send the transaction.
+
+      <br><br><br>
+      <br><br>
+      <br>
+      <br>
+      <h2>Quick Start</h2>
+
+      Initialize Nimipay (~30 kb) on any website
+      <br><br>
+      <div class="my-code-container">
+        <div class="my-code">&lt;script&gt;<br>const nimAddress = 'NQ13 YOUR WALL ETAD DRES S1F9 T4L7 EA13 N7MP';<br>const nimAddressLabel = 'Your Brand Name';<br>&lt;/script&gt;<br><br>&lt;script src="https://nimipay.com/np.0.0.9.min.js"&gt;&lt;/script&gt;<br>&lt;link href="https://nimipay.com/np.0.0.9.min.css" rel="stylesheet"&gt;</div>
+      </div>
+      <br>
+      <br>
+      Out of the box, Nimipay works client-side and without the backend. Interactions with the blockchain return data to the website, which then can be passed to the backend. See <a href="#">the source</a> of a lightweight PHP and MySQL backend used on this site.
+      <br>
+      <br>
+      Nimipay is open source. You can customize it to your individual needs.
+      <br>
+      <br>
+      <br><br><br><br><br><br>
+      <b style="font-size:16px;">Who is using Nimipay</b>
+      <br><br>
+      <a href="https://hollowmask.com/" target="_blank">Hollow Mask</a> is using Nimipay to power its digital collectibles ownership (soon)
+      <br>
+      <a href="https://setinblock.com/" target="_blank">Set in Block</a> is using Nimipay to accept donations in NIM (soon)
+      <br>
+      <a href="https://cryptoclothing.cc/" target="_blank">Crypto Clothing</a> is using Nimipay for the webshop checkout process (soon)
+      <!-- <br>
+      With Nimipay, <a href="https://nimipet.com/" target="_blank">Nimipet</a> is using NIM as an in-game currency (soon) -->
+      <div id="why-nimipay"></div>
+      <br><br>
+      
+      <br><br><br><br>
+      <b style="font-size:16px;">Why Nimipay</b>
+      <br><br>
+
+
+      <div style="line-height:180%;">
+        <span class="np-bullet">&#8226;</span> Nimipay is lightweight, less than 30 kb JS library
+        <br>
+        <span class="np-bullet">&bull;</span> One minute install on any website, no coding/crypto skills needed
+        <br>
+        <span class="np-bullet">&bull;</span> Simple to create a new NIM wallet or open an existing one
+        <br>
+        <span class="np-bullet">&bull;</span> With shortcodes, it is easy to invoice your users
+        <br>
+        <span class="np-bullet">&bull;</span> Accept payments from your users in NIM cryptocurrency
+        <br>
+        <span class="np-bullet">&bull;</span> Users can use bank cards to quickly "top up" their NIM wallets
+        <br>
+        <span class="np-bullet">&bull;</span> Privacy-focused, client-side, open-source, decentralized
+        <br>
+        <span class="np-bullet">&bull;</span> Works on any device with an internet browser
+        <br>
+        <span class="np-bullet">&bull;</span> Global and borderless payments
+      </div>
+      <br><br>
+      Nimipay is the first service that allows websites to accept payments effortlessly, and with inherent security and privacy.
+      <br><br>
+      It is possible only because it is based on <a href="https://nimiq.com" target="_blank">Nimiq</a> blockchain. The only blockchain that is in your browser and requires no installation. Nimiq is Crypto 3.0 - it provides the level of simplicity that can be intuitively grasped by any layman. Anyone can create and secure a Nimiq wallet in seconds. Furthermore, Nimiq is based on the essential cryptocurrency values and principles (security, decentralization, client-side key management, PoS).
+      <br><br>
+      Powered by the browser-based Nimiq blockchain, Nimipay allows any website to accept cryptocurrency and credit card payments effortlessly and anonymously.
+      <br><br>
+      Additionally, by giving each user a cryptocurrency wallet, custom solutions can be built on top of Nimipay, e.g. your users can deposit NIM to your website and then withdraw them. You can also pay your users by distributing affiliate earnings, airdrops, bounties, rewards, etc. NIM can be used as a currency in a virtual economy, e.g. in a browser-based game, or attached to the checkout flow in a traditional webshop.
+      <br><br>
+      Nimipay is <a href="https://github.com/giekaton/nimipay" target="_blank">open source</a> and does not charge any fees for the service.<br><br>You are welcome to <div onClick="npDonate()" title="Donate NIM" style="color:#0000ee;display:inline;cursor:pointer;"><u>Donate</u> <svg class="np-donate-logo" style="max-width:15px;padding-left:0px;padding-top:2px;" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
+      <br><br>
+      <br><br><br>
+      Nimipay v0.0.9
+      <br>
+      T&C: Use it at your own risk
+      <div style="height:14px;"></div>
+      <a href="https://twitter.com/nimipay" target="_blank">Twitter</a>&nbsp;|&nbsp;<a href="https://github.com/giekaton/nimipay" target="_blank">GitHub</a>
+      
+      <div style="height:30px;"></div>
+      <br>
+    </div>
+
+  </div>
+
+  <script>
+    const nimAddress = "NQ41 RPEL YB78 DGDV G3QV LUGT N991 CX8T 92GR";
+    const nimAddressLabel = 'Nimipay';
+  </script>
+
+  <link href="https://nimipay.com/np.0.0.9.min.css" rel="stylesheet">
+  <script src="https://nimipay.com/np.0.0.9.min.js"></script>
+
+  <!-- <link href="nimipay.css?v=001" rel="stylesheet">
+
+  <script src="HubApi.standalone.umd.js"></script>
+
+  <script>
+    const nimipayDiv = document.getElementById('nimipay');
+    if (nimipayDiv === null) { 
+      let div = document.createElement('div');
+      div.setAttribute("id", "nimipay");
+      document.body.appendChild(div);
+    }
+  </script>
+
+  <script src="reef.min.js"></script>
+
+  <script src="nimipay.js?v=001"></script> -->
+
+</body>
+</html>
