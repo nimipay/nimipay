@@ -1,7 +1,7 @@
 // https://github.com/cferdinandi/reef
 
 
-// // create a dom container for nimipay
+// // create a dom container for nimipay UNCOMMENT BEFORE MINIFYING
 // const nimipayDiv = document.getElementById('nimipay');
 // if (nimipayDiv === null) { 
 //   let div = document.createElement('div');
@@ -20,7 +20,7 @@ const hubApi = new HubApi('https://hub.nimiq.com');
 
 let np = new Reef('#nimipay', {
   data: {
-		txData: null,
+    txData: null,
     result: {
       address: '',
       label: ''
@@ -379,58 +379,13 @@ function npAddItem(e) {
 };
 
 
-// function npAddItemCheckout() {
-
-//   alert('Soon...');
-//   return;
-
-//   let xhr = new XMLHttpRequest();
-
-//   xhr.onload = function () {
-
-//     if (xhr.status >= 200 && xhr.status < 300) {
-
-//       if(xhr.response) {
-//         let invoiceId = xhr.response;
-//         let priceNim = (np.data.priceFiat / oneNimUsdValue).toFixed(2);
-//         let value = Number((priceNim * 1e5).toFixed(2));
-
-//         const options = {
-//           appName: nimAddressLabel,
-//           recipient: nimAddress,
-//           value: value,
-//           extraData: 'Invoice #'+invoiceId,
-//         };
-
-//         // All client requests are async and return a promise
-//         const signedTransaction = hubApi.checkout(options);
-
-//         signedTransaction
-//         .then((response) => {
-//           npSendTxHash(invoiceId, response.hash);
-//         })
-//         .catch((e) => {
-//           console.log('Error: ', e)
-//         });
-//       }
-    
-//     } else {
-//       console.log('The request failed!');
-//     }
-
-//   };
-
-//   xhr.open('GET', 'nimipay.php?action=npAddItem&data='+np.data.result.address);
-//   xhr.send();
-
-// }
-
 npDonateButton = document.getElementById('np-donate');
 npDonateButton.onclick = function(e) { npDonate(e); }
 
 function npDonate(e) {
   alert('Soon...');
 }
+
 
 // get address balance in nim
 function npGetBalance() {
