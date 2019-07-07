@@ -47,7 +47,7 @@ let np = new Reef('#nimipay', {
         '<div id="balance-usd"></div>'+
         '<div style="height:5px;"></div>'+
         '<div class="np-wallet-func">'+
-          '<a href="https://old.changelly.com/?ref_id=1gapuvxsnq7myyhb" class="np-link" target="_blank">Top Up</a> | <a href="https://safe.nimiq.com/" target="_blank">Backup</a>'+
+          '<a href="https://old.changelly.com/exchange/BTC/NIM/0.1?ref_id=1gapuvxsnq7myyhb" class="np-link" target="_blank">Top Up</a> | <a href="https://safe.nimiq.com/" target="_blank">Backup</a>'+
         '</div>'+
       '</div>'+
       '<div class="np-tabs">'+
@@ -107,7 +107,8 @@ function npShowItems() {
 }
 
 
-function npWallet() {
+npWalletButton = document.getElementById('np-wallet');
+npWalletButton.onclick = function() {
 
   try {
 
@@ -158,7 +159,6 @@ function npGetInvoiceIndex(id_invoice) {
 
 
 function npCheckout(id_invoice, oneNimUsdValue) {
-  console.log(id_invoice);
 
   let index = npGetInvoiceIndex(id_invoice);
 
@@ -217,7 +217,31 @@ function npCheckoutPrepare(id_invoice) {
 }
 
 
-function npAddItem() {
+npAddItemInstantBuyButton = document.getElementById('np-add-item-checkout');
+npAddItemInstantBuyButton.onclick = (e) => npAddItemInstantBuy(e);
+
+function npAddItemInstantBuy(e) {
+
+    // pass any custom data using 'data-' attributes
+    if (e.target.getAttribute('data-value') != null) {
+      let value = e.target.getAttribute('data-value');
+    };
+
+    let data = { 'value': value };
+
+    npAddItem(data);
+}
+
+
+npAddItemButton = document.getElementById('np-add-item');
+npAddItemButton.onclick = (e) => npAddItem(e);
+
+function npAddItem(e) {
+
+  // if (typeof(e.value) != 'undefined') {
+  //   let value = e.value;
+  // }
+  
   let xhr = new XMLHttpRequest();
 
   if (np.data.result.address != '') {
@@ -282,55 +306,54 @@ function npAddItem() {
 
   }
 
-}
+};
 
 
+// function npAddItemCheckout() {
 
-function npAddItemCheckout() {
+//   alert('Soon...');
+//   return;
 
-  alert('Soon...');
-  return;
+//   let xhr = new XMLHttpRequest();
 
-  let xhr = new XMLHttpRequest();
+//   xhr.onload = function () {
 
-  xhr.onload = function () {
+//     if (xhr.status >= 200 && xhr.status < 300) {
 
-    if (xhr.status >= 200 && xhr.status < 300) {
+//       if(xhr.response) {
+//         let invoiceId = xhr.response;
+//         let priceNim = (np.data.priceFiat / oneNimUsdValue).toFixed(2);
+//         let value = Number((priceNim * 1e5).toFixed(2));
 
-      if(xhr.response) {
-        let invoiceId = xhr.response;
-        let priceNim = (np.data.priceFiat / oneNimUsdValue).toFixed(2);
-        let value = Number((priceNim * 1e5).toFixed(2));
+//         const options = {
+//           appName: nimAddressLabel,
+//           recipient: nimAddress,
+//           value: value,
+//           extraData: 'Invoice #'+invoiceId,
+//         };
 
-        const options = {
-          appName: nimAddressLabel,
-          recipient: nimAddress,
-          value: value,
-          extraData: 'Invoice #'+invoiceId,
-        };
+//         // All client requests are async and return a promise
+//         const signedTransaction = hubApi.checkout(options);
 
-        // All client requests are async and return a promise
-        const signedTransaction = hubApi.checkout(options);
-
-        signedTransaction
-        .then((response) => {
-          npSendTxHash(invoiceId, response.hash);
-        })
-        .catch((e) => {
-          console.log('Error: ', e)
-        });
-      }
+//         signedTransaction
+//         .then((response) => {
+//           npSendTxHash(invoiceId, response.hash);
+//         })
+//         .catch((e) => {
+//           console.log('Error: ', e)
+//         });
+//       }
     
-    } else {
-      console.log('The request failed!');
-    }
+//     } else {
+//       console.log('The request failed!');
+//     }
 
-  };
+//   };
 
-  xhr.open('GET', 'nimipay.php?action=npAddItem&data='+np.data.result.address);
-  xhr.send();
+//   xhr.open('GET', 'nimipay.php?action=npAddItem&data='+np.data.result.address);
+//   xhr.send();
 
-}
+// }
 
 
 function npDonate() {
@@ -404,16 +427,17 @@ function npTxBackendValidate(tx, id_invoice) {
     if (xhr.status >= 200 && xhr.status < 300) {
 
       if (xhr.response == 'pending') {
-        console.log("Validating Tx: trying again...");
-        document.getElementById('np-invoice-'+id_invoice).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';
-        // @@todo: double check
+
         if (document.getElementById('np-modal').style.display != 'none') {
+          console.log("Validating Tx: Trying again...");
+          document.getElementById('np-invoice-'+id_invoice).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';  
           setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 10000);
         }
+
       }
 
       // else if (xhr.response == 'confirmed') {
-      //   console.log('Validating Tx: confirmed');
+      //   console.log('Validating Tx: Confirmed');
       //   npSendUserAddress();
       // }
 

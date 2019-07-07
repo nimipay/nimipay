@@ -120,10 +120,10 @@
       <br>
       <br>
       <br><br>
-      <div onclick="npWallet()" id="choose-address" class="np-button">Open My NIM Wallet</div>
+      <div id="np-wallet" class="np-button">Open My NIM Wallet</div>
 
       <div class="my-code-container">
-        <span class="my-code">&lt;div onclick="npWallet()" class="np-btn"&gt;Open My NIM Wallet&lt;/div&gt;</span>
+        <span class="my-code">&lt;div id="np-wallet" class="np-btn"&gt;Open My NIM Wallet&lt;/div&gt;</span>
       </div>
       <br>
       The above code will place a button on your website that will allow the user to open his or her NIM wallet or to create a new one.
@@ -137,28 +137,28 @@
 
       <div style="height:5px;"></div>
 
-      <div onclick="npAddItem()" class="np-button">Add to Cart</div>
+      <div id="np-add-item" class="np-button">Add to Cart</div>
 
       <div class="my-code-container">
-        <span class="my-code">&lt;div onclick="npAddItem()" data:type="fortune_cookie" data:value="0.1" data:meta="" class="np-btn"&gt;Add to Cart&lt;/div&gt;</span>
+        <span class="my-code">&lt;div id="np-add-item" class="np-btn"&gt;Add to Cart&lt;/div&gt;</span>
       </div>
 
       <br>
-      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received.
+      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received. You can pass custom data for the invoice using data- attributes, as is being used by <a href="https://github.com/giekaton/hollow-mask" target="_blank">Hollow Mask</a>.
 
       <br><br>
       <br><br>
       <br>
 
       <div class="np-product"><img src="img/fortune-cookie.jpg" style="width:100%;"></div>
-      Fortune Cookie (0.01$)
+      Fortune Cookie (0.10$)
 
       <div style="height:5px;"></div>
 
-      <div onclick="npAddItemCheckout()" class="np-button">Instant Buy</div>
+      <div id="np-add-item-checkout" class="np-button">Instant Buy</div>
 
       <div class="my-code-container">
-        <span class="my-code">&lt;div onclick="npAddItemCheckout()" data:type="fortune_cookie" data:value="0.1" data:meta="instant" class="np-btn"&gt;Instant Buy&lt;/div&gt;</span>
+        <span class="my-code">&lt;div id="np-add-item-checkout" data-value="0.1" class="np-btn"&gt;Instant Buy&lt;/div&gt;</span>
       </div>
 
       <br>
@@ -168,10 +168,10 @@
       <br><br>
       <br><br>
 
-      <div onclick="npDonate()" class="np-donate" title="Donate NIM">Donate <svg class="np-donate-logo" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><title>NIM</title><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
+      <div id="np-donate" class="np-donate" title="Donate NIM">Donate <svg class="np-donate-logo" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><title>NIM</title><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
 
       <div class="my-code-container">
-        <span class="my-code">&lt;div onclick="npDonate()" data:msg="Donation to Nimipay" class="np-btn"&gt;Donate&lt;/div&gt;</span>
+        <span class="my-code">&lt;div id="np-donate" class="np-donate" title="Donate NIM"&gt;Donate&lt;/div&gt;</span>
       </div>
 
       <br>
