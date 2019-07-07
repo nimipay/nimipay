@@ -21,8 +21,6 @@ const hubApi = new HubApi('https://hub.nimiq.com');
 let np = new Reef('#nimipay', {
   data: {
 		txData: null,
-    priceFiat: 0.01, // USD
-    priceNim: 0.00,
     result: {
       address: '',
       label: ''
@@ -117,25 +115,25 @@ function npWallet() {
     
     walletData.then(data => {
 
-      // @@todo: optimize
+      // reset if a previous user is different
       if (typeof(np.data.result.address) != 'undefined') {
-        np.setData({ 
-        txData: null,
-        priceFiat: 0.01, // USD
-        priceNim: 0.00,
-        result: {
-          address: '',
-          label: ''
-        },
-        invoices: [],
-        items: [],
-        userBalanceNim: null,
-        userBalanceUsd: null,
-        invoicesString: '',
-        itemsString: '',
-        checkoutFeedback: '',
-        invoicesCount: 0,
-        itemsCount: 0 });
+        if (np.data.result.address != data.address) {
+          np.setData({ 
+          txData: null,
+          result: {
+            address: '',
+            label: ''
+          },
+          invoices: [],
+          items: [],
+          userBalanceNim: null,
+          userBalanceUsd: null,
+          invoicesString: '',
+          itemsString: '',
+          checkoutFeedback: '',
+          invoicesCount: 0,
+          itemsCount: 0 });
+        }
       }
 
       np.render();
@@ -273,7 +271,7 @@ function npAddItem() {
       
         };
       
-        xhr.open('GET', 'nimipay.php?action=npAddItem&data='+data.result.address);
+        xhr.open('GET', 'nimipay.php?action=npAddItem&data='+data.address);
         xhr.send();
 
       })
@@ -338,7 +336,7 @@ function npAddItemCheckout() {
 function npDonate() {
 
   // @@todo: need to do an UI where user can enter a donation sum, then prefill it for the checkout
-  alert('Not working yet, as it requires a custom UI where the user can enter a donation sum. Coming soon.');
+  alert('Soon...');
   return;
 
   const options = {
@@ -359,7 +357,6 @@ function npDonate() {
   });
 
 }
-
 
 
 // get address balance in nim
@@ -409,6 +406,7 @@ function npTxBackendValidate(tx, id_invoice) {
       if (xhr.response == 'pending') {
         console.log("Validating Tx: trying again...");
         document.getElementById('np-invoice-'+id_invoice).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';
+        // @@todo: double check
         if (document.getElementById('np-modal').style.display != 'none') {
           setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 10000);
         }
@@ -434,47 +432,12 @@ function npTxBackendValidate(tx, id_invoice) {
 }
 
 
-function npInvoicePriceInNim() {
-
-  let xhr = new XMLHttpRequest();
-
-  xhr.onload = function () {
-
-    if (xhr.status >= 200 && xhr.status < 300) {
-
-      np.data.invoices.value = Number(np.data.invoices.value);
-
-      let priceNim = (np.data.invoices.value / (JSON.parse(xhr.response).nim_qc));
-      np.setData({ priceNim: priceNim });
-      
-      let invoicesString = npInvoiceStringMaker(np.data.invoices.id_invoice, np.data.invoices.value.toFixed(2), priceNim.toFixed(2), np.data.invoices.status, np.data.invoices.tx);
-
-      invoicesString += '</div>';
-
-      let finalinvoicesString = np.data.invoicesString + invoicesString;
-
-      np.setData({ invoicesString: finalinvoicesString });
-
-    } else {
-      console.log('The request failed!');
-    }
-
-  };
-
-  xhr.open('GET', 'https://nimiq.mopsus.com/api/price?currency=usd');
-  xhr.send();
-
-}
-
-
 function npInvoicesPriceInNim() {
   let xhr = new XMLHttpRequest();
 
   xhr.onload = function () {
 
     if (xhr.status >= 200 && xhr.status < 300) {
-
-      np.data.invoices.length;
 
       let invoicesString = '';
 
@@ -529,17 +492,14 @@ function npSendUserAddress() {
       let data = JSON.parse(xhr.response);
 
       if (data[1] == 'initial') {
-        np.setData({ invoicesCount: 1 });
-        np.setData({ invoices: data[0] });
-
-        npInvoicePriceInNim();
+        npSendUserAddress();
       }
       else {
         np.setData({ invoicesCount: data[0].length });
         np.setData({ invoices: data[0] });
         np.setData({ items: data[1] });
 
-        // create invoiceS     
+        // create invoice(-s)
         npInvoicesPriceInNim();
         
         // create items
