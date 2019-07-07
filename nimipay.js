@@ -148,7 +148,7 @@ npWalletButton.onclick = function() {
   } catch (error) {
     console.log(error.message);
   }
-};
+}
 
 
 function npGetInvoiceIndex(id_invoice) {
@@ -355,32 +355,12 @@ function npAddItem(e) {
 
 // }
 
+npDonateButton = document.getElementById('np-donate');
+npDonateButton.onclick = (e) => npDonate(e);
 
-function npDonate() {
-
-  // @@todo: need to do an UI where user can enter a donation sum, then prefill it for the checkout
+function npDonate(e) {
   alert('Soon...');
-  return;
-
-  const options = {
-    appName: nimAddressLabel,
-    recipient: nimAddress,
-    extraData: 'Donation to Nimipay'
-  };
-
-  const signedTransaction = hubApi.checkout(options);
-
-  signedTransaction
-  .then((response) => {
-    console.log('success');
-    console.log(response);
-  })
-  .catch((e) => {
-    console.log('Error: ', e)
-  });
-
 }
-
 
 // get address balance in nim
 function npGetBalance() {
