@@ -63,10 +63,39 @@ let np = new Reef('#nimipay', {
 });
 
 
+function npInvoiceStringMaker(id_invoice, value, value_nim, status, tx) {
+  let invoiceString = '<div class="np-wallet">'+
+    '<div class="charge"><b>Invoice #'+id_invoice+'</b><br><br>'+
+    'Payment sum: '+value+' USD ('+value_nim+' NIM)<br><br>'+
+    '<div id="np-invoice-'+id_invoice+'">';
+
+  if (status == '') {
+    invoiceString += '<div class="np-btn np-btn-small" onclick="npCheckoutPrepare(\''+id_invoice+'\')">Pay '+value_nim+' NIM</div>';
+  }
+  else if (status == 'pending') {
+    invoiceString += '<b>Pending confirmation...</b> <span class="np-loading np-line"></span><br><br>';
+    
+    setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 5000);
+  }
+  else if (stats = 'confirmed') {
+    invoiceString += 'Payment received: <a href="https://nimiq.watch/#'+tx+'" target="_blank">Explore</a><br><br>';
+  }
+
+  invoiceString += '</div><div id="np-error-'+id_invoice+'"></div></div>';
+    
+  return invoiceString;
+}
+
+
+function npItemsStringMaker(id_invoice, type, content) {
+  if (type == 'fortune_cookie') {
+    return ('<div class="np-wallet">Fortune Cookie #'+id_invoice+'<br><div class="np-nimiqookie-content"><div style="line-height:22px;padding:20px;"><b>'+content+'</b></div></div></div>');
+  }
+}
+
+
 function npCloseModal() {
   document.getElementById('np-modal').style.display = "none";
-  // @@todo: clean wallet data(?)
-  // do this on wallet UI load, if address != '' and != old address
 }
 
 function npShowInvoices() {
@@ -81,12 +110,34 @@ function npShowItems() {
 
 
 function npWallet() {
-  
+
   try {
 
     const walletData = hubApi.chooseAddress({ appName: 'Nimipay' });
     
     walletData.then(data => {
+
+      // @@todo: optimize
+      if (typeof(np.data.result.address) != 'undefined') {
+        np.setData({ 
+        txData: null,
+        priceFiat: 0.01, // USD
+        priceNim: 0.00,
+        result: {
+          address: '',
+          label: ''
+        },
+        invoices: [],
+        items: [],
+        userBalanceNim: null,
+        userBalanceUsd: null,
+        invoicesString: '',
+        itemsString: '',
+        checkoutFeedback: '',
+        invoicesCount: 0,
+        itemsCount: 0 });
+      }
+
       np.render();
       np.setData({ result: data });
 
@@ -101,15 +152,23 @@ function npWallet() {
 };
 
 
-function npCheckout(invoiceId, oneNimUsd) {
+function npGetInvoiceIndex(id_invoice) {
+  for(let i = 0; i < np.data.invoices.length; i += 1) {
+    if (np.data.invoices[i].id_invoice == id_invoice) { return i; }
+  }
+}
 
-  // @@todo: get a PARTICULAR INVOICE VALUE
 
-  let priceNim = (np.data.priceFiat / oneNimUsd).toFixed(2);
+function npCheckout(id_invoice, oneNimUsdValue) {
+  console.log(id_invoice);
+
+  let index = npGetInvoiceIndex(id_invoice);
+
+  let priceNim = (np.data.invoices[index].value / oneNimUsdValue).toFixed(2);
   let value = Number((priceNim * 1e5).toFixed(2));
 
   if (Number(priceNim) > Number(np.data.userBalanceNim)) {
-    document.getElementById('np-error-'+invoiceId).innerHTML = '<div style="margin-top:5px;margin-bottom:10px;color:red;">You do not have enough NIM to pay the invoice.</div>';
+    document.getElementById('np-error-'+id_invoice).innerHTML = '<div style="margin-top:5px;margin-bottom:10px;color:red;">You do not have enough NIM to pay the invoice.</div>';
     return;
   }
 
@@ -117,7 +176,7 @@ function npCheckout(invoiceId, oneNimUsd) {
     appName: nimAddressLabel,
     recipient: nimAddress,
     value: value,
-    extraData: 'Invoice #'+invoiceId,
+    extraData: 'Invoice #'+id_invoice,
     sender: np.data.result.address,
     forceSender: true
   };
@@ -127,13 +186,35 @@ function npCheckout(invoiceId, oneNimUsd) {
 
   signedTransaction
   .then((response) => {
-    document.getElementById('np-invoice-'+invoiceId).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';
-    npSendTxHash(invoiceId, response.hash);
-    npTxBackendValidate(response.hash, invoiceId);
+    document.getElementById('np-invoice-'+id_invoice).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';
+    npSendTxHash(id_invoice, response.hash);
+    npTxBackendValidate(response.hash, id_invoice);
   })
   .catch((e) => {
     console.log('Error: ', e)
   });
+
+}
+
+
+// checkout prepare
+function npCheckoutPrepare(id_invoice) {
+
+  let xhr = new XMLHttpRequest();
+
+  xhr.onload = function () {
+
+    if (xhr.status >= 200 && xhr.status < 300) {
+      npCheckout(id_invoice, JSON.parse(xhr.response).nim_qc);
+
+    } else {
+      console.log('The request failed!');
+    }
+
+  };
+
+  xhr.open('GET', 'https://nimiq.mopsus.com/api/price?currency=usd');
+  xhr.send();
 
 }
 
@@ -162,36 +243,49 @@ function npAddItem() {
   }
 
   else {
-    alert('First open your NIM wallet');
+
+    // first open user's wallet and get its address
+    try {
+
+      const walletData = hubApi.chooseAddress({ appName: 'Nimipay' });
+      
+      walletData.then(data => {
+
+        // then using user's address, create a new item on the backend
+        xhr.onload = function () {
+
+          if (xhr.status >= 200 && xhr.status < 300) {
+      
+            if(xhr.response) {
+              
+              np.render();
+              np.setData({ result: data });
+        
+              document.getElementById('np-modal').style.display = "block";
+              npGetBalance();
+              npSendUserAddress();
+
+            }
+          
+          } else {
+            console.log('The request failed!');
+          }
+      
+        };
+      
+        xhr.open('GET', 'nimipay.php?action=npAddItem&data='+data.result.address);
+        xhr.send();
+
+      })
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+
   }
 
 }
 
-
-function npDonate() {
-
-  // @@todo: need to do an UI where user can enter a donation sum, then prefill it for the checkout
-  alert('Not working yet, as it requires a custom UI where the user can enter a donation sum. Coming soon.');
-  return;
-
-  const options = {
-    appName: nimAddressLabel,
-    recipient: nimAddress,
-    extraData: 'Donation to Nimipay'
-  };
-
-  const signedTransaction = hubApi.checkout(options);
-
-  signedTransaction
-  .then((response) => {
-    console.log('success');
-    console.log(response);
-  })
-  .catch((e) => {
-    console.log('Error: ', e)
-  });
-
-}
 
 
 function npAddItemCheckout() {
@@ -207,7 +301,7 @@ function npAddItemCheckout() {
 
       if(xhr.response) {
         let invoiceId = xhr.response;
-        let priceNim = (np.data.priceFiat / oneNimUsd).toFixed(2);
+        let priceNim = (np.data.priceFiat / oneNimUsdValue).toFixed(2);
         let value = Number((priceNim * 1e5).toFixed(2));
 
         const options = {
@@ -239,6 +333,33 @@ function npAddItemCheckout() {
   xhr.send();
 
 }
+
+
+function npDonate() {
+
+  // @@todo: need to do an UI where user can enter a donation sum, then prefill it for the checkout
+  alert('Not working yet, as it requires a custom UI where the user can enter a donation sum. Coming soon.');
+  return;
+
+  const options = {
+    appName: nimAddressLabel,
+    recipient: nimAddress,
+    extraData: 'Donation to Nimipay'
+  };
+
+  const signedTransaction = hubApi.checkout(options);
+
+  signedTransaction
+  .then((response) => {
+    console.log('success');
+    console.log(response);
+  })
+  .catch((e) => {
+    console.log('Error: ', e)
+  });
+
+}
+
 
 
 // get address balance in nim
@@ -277,58 +398,6 @@ function npGetBalanceUsd(userBalanceNim) {
 }
 
 
-function npOneNimToUsd(invoiceId) {
-
-  let xhr = new XMLHttpRequest();
-
-  xhr.onload = function () {
-
-    if (xhr.status >= 200 && xhr.status < 300) {
-      npCheckout(invoiceId, JSON.parse(xhr.response).nim_qc);
-
-    } else {
-      console.log('The request failed!');
-    }
-
-  };
-
-  xhr.open('GET', 'https://nimiq.mopsus.com/api/price?currency=usd');
-  xhr.send();
-
-}
-
-
-function npInvoiceStringMaker(id_invoice, value, value_nim, status, tx) {
-  let invoiceString = '<div class="np-wallet">'+
-    '<div class="charge"><b>Invoice #'+id_invoice+'</b><br><br>'+
-    'Payment sum: '+value+' USD ('+value_nim+' NIM)<br><br>'+
-    '<div id="np-invoice-'+id_invoice+'">';
-
-  if (status == '') {
-    invoiceString += '<div class="np-btn np-btn-small" onclick="npOneNimToUsd(\''+id_invoice+'\')">Pay '+value_nim+' NIM</div>';
-  }
-  else if (status == 'pending') {
-    invoiceString += '<b>Pending confirmation...</b> <span class="np-loading np-line"></span><br><br>';
-    
-    setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 5000);
-  }
-  else if (stats = 'confirmed') {
-    invoiceString += 'Payment received: <a href="https://nimiq.watch/#'+tx+'" target="_blank">Explore</a><br><br>';
-  }
-
-  invoiceString += '</div><div id="np-error-'+id_invoice+'"></div></div>';
-    
-  return invoiceString;
-}
-
-
-function npItemsStringMaker(id_invoice, type, content) {
-  if (type == 'fortune_cookie') {
-    return ('<div class="np-wallet">Fortune Cookie #'+id_invoice+'<br><div class="np-nimiqookie-content"><div style="line-height:22px;padding:20px;"><b>'+content+'</b></div></div></div>');
-  }
-}
-
-
 function npTxBackendValidate(tx, id_invoice) {
 
   let xhr = new XMLHttpRequest();
@@ -336,16 +405,17 @@ function npTxBackendValidate(tx, id_invoice) {
   xhr.onload = function () {
 
     if (xhr.status >= 200 && xhr.status < 300) {
-      // console.log(xhr.response);
 
       if (xhr.response == 'pending') {
-        console.log("Tx data: trying again");
+        console.log("Validating Tx: trying again...");
         document.getElementById('np-invoice-'+id_invoice).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';
-        setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 10000);
+        if (document.getElementById('np-modal').style.display != 'none') {
+          setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 10000);
+        }
       }
 
       // else if (xhr.response == 'confirmed') {
-      //   console.log('Tx data: received');
+      //   console.log('Validating Tx: confirmed');
       //   npSendUserAddress();
       // }
 
