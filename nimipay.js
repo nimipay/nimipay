@@ -108,8 +108,10 @@ function npShowItems() {
 
 
 npWalletButton = document.getElementById('np-wallet');
-npWalletButton.onclick = function() {
+npWalletButton.onclick = function() { npWallet(); }
 
+
+function npWallet() {
   try {
 
     const walletData = hubApi.chooseAddress({ appName: 'Nimipay' });
@@ -177,7 +179,7 @@ function npCheckout(id_invoice, oneNimUsdValue) {
     extraData: 'Invoice #'+id_invoice,
     sender: np.data.result.address,
     forceSender: true
-  };
+  }
 
   // All client requests are async and return a promise
   const signedTransaction = hubApi.checkout(options);
@@ -209,7 +211,7 @@ function npCheckoutPrepare(id_invoice) {
       console.log('The request failed!');
     }
 
-  };
+  }
 
   xhr.open('GET', 'https://nimiq.mopsus.com/api/price?currency=usd');
   xhr.send();
@@ -217,53 +219,118 @@ function npCheckoutPrepare(id_invoice) {
 }
 
 
-npAddItemInstantBuyButton = document.getElementById('np-add-item-checkout');
-npAddItemInstantBuyButton.onclick = (e) => npAddItemInstantBuy(e);
+npAddItemButton = document.getElementById('np-add-item');
+npAddItemButton.onclick = function(e) { npAddItem(e); };
 
-function npAddItemInstantBuy(e) {
+npAddItemButton = document.getElementById('np-add-item-instant');
+npAddItemButton.onclick = function(e) { npAddItemInstant(e); };
 
-    // pass any custom data using 'data-' attributes
-    if (e.target.getAttribute('data-value') != null) {
-      let value = e.target.getAttribute('data-value');
-    };
 
-    let data = { 'value': value };
+function npAddItemInstant(e) {
+  // for both logged in and logged out users
 
-    npAddItem(data);
+  // custom data
+  let valueFiat = e.target.getAttribute('data-value');
+  let type = e.target.getAttribute('data-type');
+
+  let xhr = new XMLHttpRequest();
+
+  xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      oneNimUsdValue = JSON.parse(xhr.response).nim_qc;
+
+      // checkout
+      let priceNim = (valueFiat / oneNimUsdValue).toFixed(2);
+      let value = Number((priceNim * 1e5).toFixed(2));
+
+      const options = {
+        appName: nimAddressLabel,
+        recipient: nimAddress,
+        value: value
+      }
+
+      const signedTransaction = hubApi.checkout(options);
+
+      signedTransaction
+      .then((response) => {
+
+        // console.log(response.raw.sender, response.hash);
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.onload = function () {
+
+          if (xhr.status >= 200 && xhr.status < 300) {
+      
+            if(xhr.response) {
+              np.render();
+
+              let data = { address: response.raw.sender, label: '' }
+              np.setData({ result: data });
+
+              document.getElementById('np-modal').style.display = "block";
+              npGetBalance();
+              npSendUserAddress();
+            }
+          
+          } else {
+            console.log('The request failed!');
+          }
+      
+        };
+
+        let data = JSON.stringify({'address':response.raw.sender,'value':valueFiat,'tx':response.hash});
+
+        xhr.open('GET', 'nimipay.php?action=npAddItemCustom&data='+data);
+        xhr.send();
+        
+      })
+      .catch((e) => {
+        console.log('Error: ', e)
+      });
+    } 
+    else { console.log('error 241'); }
+  }
+
+  xhr.open('GET', 'https://nimiq.mopsus.com/api/price?currency=usd');
+  xhr.send();
+
+  return;
 }
 
 
-npAddItemButton = document.getElementById('np-add-item');
-npAddItemButton.onclick = (e) => npAddItem(e);
-
 function npAddItem(e) {
 
-  // if (typeof(e.value) != 'undefined') {
-  //   let value = e.value;
-  // }
-  
-  let xhr = new XMLHttpRequest();
+  // uncomment to get custom data (e)
+  // let valueFiat = e.target.getAttribute('data-value');
 
+  // for logged in user
   if (np.data.result.address != '') {
+    let xhr = new XMLHttpRequest();
+
     xhr.onload = function () {
 
       if (xhr.status >= 200 && xhr.status < 300) {
   
         if(xhr.response) {
-          document.getElementById('np-modal').style.display = "block";
-          npSendUserAddress();
+
+            document.getElementById('np-modal').style.display = "block";
+            npSendUserAddress();
+
         }
       
       } else {
         console.log('The request failed!');
       }
   
-    };
-  
+    };  
+
     xhr.open('GET', 'nimipay.php?action=npAddItem&data='+np.data.result.address);
     xhr.send();
+
   }
 
+  // for logged out user
   else {
 
     // first open user's wallet and get its address
@@ -274,12 +341,14 @@ function npAddItem(e) {
       walletData.then(data => {
 
         // then using user's address, create a new item on the backend
+        let xhr = new XMLHttpRequest();
+
         xhr.onload = function () {
 
           if (xhr.status >= 200 && xhr.status < 300) {
       
-            if(xhr.response) {
-              
+            if (xhr.response) {
+
               np.render();
               np.setData({ result: data });
         
@@ -289,16 +358,17 @@ function npAddItem(e) {
 
             }
           
-          } else {
+          } 
+          else {
             console.log('The request failed!');
           }
-      
+
         };
-      
+
         xhr.open('GET', 'nimipay.php?action=npAddItem&data='+data.address);
         xhr.send();
 
-      })
+      });
       
     } catch (error) {
       console.log(error.message);
@@ -356,7 +426,7 @@ function npAddItem(e) {
 // }
 
 npDonateButton = document.getElementById('np-donate');
-npDonateButton.onclick = (e) => npDonate(e);
+npDonateButton.onclick = function(e) { npDonate(e); }
 
 function npDonate(e) {
   alert('Soon...');

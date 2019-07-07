@@ -114,6 +114,33 @@
     }
 
 
+    // when user adds new item
+    if ($action == "npAddItemCustom") {
+
+        $data = json_decode($data, true);
+        
+        $address = $data["address"];
+        $value = $data["value"];
+        $tx = $data["tx"];
+
+        $id_invoice = uniqid();
+
+        // create new invoice, write to db
+        DB::insert('nimipay_invoices', array(
+        'id_invoice' => $id_invoice,
+        'type' => 'fortune_cookie',
+        'value' => $value,
+        'tx' => $tx,
+        'address' => $address,
+        'status' => 'pending'
+        ));
+
+        echo $id_invoice;
+        exit();
+
+    }
+
+
     // when user has sent transaction
     if ($action == 'sendTxHash') {
         $data = json_decode($data, true);

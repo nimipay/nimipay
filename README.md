@@ -39,7 +39,7 @@ See https://nimipay.com
 @todo:
 - ~~Individual product prices~~
 - ~~Add to cart when not logged in~~
-- Instant buy
+- ~~Instant buy~~
 - Donation
 - Shortcodes
 - Optimized final bundle
