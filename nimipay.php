@@ -19,7 +19,7 @@
     $data = $_GET['data'];
 
 
-    // when user logs into his wallet
+    // when user logs into a wallet
     if ($action == "sendUserAddress") {
 
         $data = json_decode($data, true);

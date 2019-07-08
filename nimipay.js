@@ -73,7 +73,7 @@ function npInvoiceStringMaker(id_invoice, value, value_nim, status, tx) {
   else if (status == 'pending') {
     invoiceString += '<b>Pending confirmation...</b> <span class="np-loading np-line"></span><br><br>';
     
-    setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 5000);
+    setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 5000 + Math.random() * (20 - 5) * 1000);
   }
   else if (stats = 'confirmed') {
     invoiceString += 'Payment received: <a href="https://nimiq.watch/#'+tx+'" target="_blank">Explore</a><br><br>';
@@ -231,7 +231,6 @@ function npAddItemInstant(e) {
 
   // custom data
   let valueFiat = e.target.getAttribute('data-value');
-  let type = e.target.getAttribute('data-type');
 
   let xhr = new XMLHttpRequest();
 
@@ -436,7 +435,7 @@ function npTxBackendValidate(tx, id_invoice) {
         if (document.getElementById('np-modal').style.display != 'none') {
           console.log("Validating Tx: Trying again...");
           document.getElementById('np-invoice-'+id_invoice).innerHTML = '<b>Confirming transaction...</b> <span class="np-loading np-line"></span><div style="height:10px;"></div><div style="font-size:13px;padding-left:6px;padding-right:6px;margin-bottom:10px;">After the transaction is confirmed, your order will be activated. Please wait, or open your wallet later to see the new item.</div></div>';  
-          setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 10000);
+          setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 5000 + Math.random() * (20 - 5) * 1000);
         }
 
       }
