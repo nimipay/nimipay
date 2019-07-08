@@ -438,6 +438,7 @@ function npDonate() {
     signedTransaction
     .then((response) => {
       document.getElementById('np-donate-content').innerHTML = 'Your payment is sent!<br><br>Thank you for donating.';
+      document.getElementById('np-donate-modal').onclick = function () { document.getElementById('np-donate-modal').remove() }
     })
     .catch((e) => {
       console.log('Error: ', e)
