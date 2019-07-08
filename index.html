@@ -126,7 +126,7 @@
         <span class="my-code">&lt;div id="np-wallet" class="np-btn"&gt;Open My NIM Wallet&lt;/div&gt;</span>
       </div>
       <br>
-      The above code will place a button on your website that will allow the user to open his or her NIM wallet or to create a new one.
+      The above code will place a button on your website that will allow the user to open his or her NIM wallet or to create a new one. It also creates a new record in the database, using user's wallet address as the unique identifier for the user's db records.
 
       <br><br>
       <br><br>
@@ -144,7 +144,7 @@
       </div>
 
       <br>
-      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received. You can pass custom data for the invoice using data- attributes, as is being used by <a href="https://github.com/giekaton/hollow-mask" target="_blank">Hollow Mask</a>.
+      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received. You can pass custom data for the invoice using <i>data-</i> attributes, as is being used by <a href="https://github.com/giekaton/hollow-mask" target="_blank">Hollow Mask</a>.
 
       <br><br>
       <br><br>
@@ -162,7 +162,7 @@
       </div>
 
       <br>
-      Single invoice, instant pay. When clicked, it will open a Nimiq checkout screen with the new invoice to pay. The meta tag is optional. It can be used to pass additional data to the backend, e.g. item ID. For the above cookie example, invoice and item IDs are generated on the backend.
+      Single invoice, goes straight to the Nimiq checkout screen with the new invoice to pay. Returns invoice data to the backend and shows it in the user's wallet. The <i>data-</i> attributes are optional. In this case, the <i>data-value</i> attribute is used to pass a custom invoice value.
 
       <br><br>
       <br><br>
@@ -175,7 +175,7 @@
       </div>
 
       <br>
-      Opens a simple UI that allows the user to enter a custom donation sum, and then make the payment. It shows a thank you message after the donation is done. See how <a href="https://setinblock.com/about" target="_blank" style="white-space: nowrap;">Set in Block</a> is utilizing NIM donations without using any backend.
+      Opens a simple UI that allows the user to enter a custom donation sum, and then make the payment. It shows a thank you message after the donation is done. See how <a href="https://setinblock.com/about" target="_blank" style="white-space: nowrap;">Set in Block</a> is utilizing NIM donations. Works without the backend.
 
       <br><br><br>
       <br><br>

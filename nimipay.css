@@ -159,11 +159,6 @@
 .np-donate {
   color: white;
   font-size:16px;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important; */
-
   font-weight: normal;
   background-color: black;
   border: 1px solid grey;
@@ -190,10 +185,6 @@
   .np-donate {
     width: 80%;
   }
-}
-
-#np-donation-to {
-  /* font-weight: bold; */
 }
 
 .np-donate-input {
