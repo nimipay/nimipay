@@ -40,6 +40,6 @@ See https://nimipay.com
 - ~~Individual product prices~~
 - ~~Add to cart when not logged in~~
 - ~~Instant buy~~
-- ~~ Donation ~~
+- ~~Donation~~
 - Shortcodes
 - Optimized final bundle
