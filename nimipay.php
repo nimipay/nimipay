@@ -141,7 +141,7 @@
     }
 
 
-    // when user has sent transaction
+    // when user pings the backend that the tx was sent
     if ($action == 'sendTxHash') {
         $data = json_decode($data, true);
 
