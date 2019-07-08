@@ -379,10 +379,72 @@ function npAddItem(e) {
 
 
 npDonateButton = document.getElementById('np-donate');
-npDonateButton.onclick = function(e) { npDonate(e); }
+npDonateButton.onclick = function() { npDonate(); }
 
-function npDonate(e) {
-  alert('Soon...');
+function npDonate() {
+
+  let npDonationString = '<div class="np-modal-window" id="np-donate-modal">'+
+    '<div class="np-donate">'+
+      '<div class="np-donate-inner">'+
+        '<div onclick="document.getElementById(\'np-donate-modal\').remove()" class="np-modal-close" style="font-size: 18px;color:#a8a8a8;margin-top: -32px;margin-left:-5px;">✕</div>'+
+        '<div id="np-donate-content">'+
+          'Donation to <span id="np-donation-to">'+nimAddressLabel+'</span>'+
+          '<br><br><br><br>'+
+          '<span style="font-size:14px;">Donation amount in NIM</span>'+
+          '<br>'+
+          '<input id="np-donation-value" class="np-donate-input" type="number" min="1" autofocus></input>'+
+          '<br><br>'+
+          '<span id="np-donate-checkout" title="Donate NIM" style="cursor:pointer">Donate <svg class="np-donate-logo" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></span>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+
+  let div = document.createElement('div');
+  div.setAttribute("id", "np-donation");
+  document.body.appendChild(div);
+
+  document.getElementById('np-donation').innerHTML = npDonationString;
+
+  npDonateCheckoutButton = document.getElementById('np-donate-checkout');
+  npDonateCheckoutButton.onclick = function() { npDonateCheckout(); }
+
+  npDonateCheckoutButton = document.getElementById('np-donation-value');
+  npDonateCheckoutButton.addEventListener('keypress', function (e) {
+    let key = e.which || e.keyCode;
+    if (key === 13) { // 13 is enter
+      npDonateCheckout();
+    }
+  });
+
+
+  function npDonateCheckout() {
+    
+    // validate input
+    let value = document.getElementById('np-donation-value').value;
+    if (value < 1) { alert('Please enter a value that is above 1 NIM.'); return; }
+
+    value = Number((value * 1e5).toFixed(2));
+
+    const options = {
+      appName: nimAddressLabel,
+      recipient: nimAddress,
+      extraData: 'Donation to '+nimAddressLabel,
+      value: value
+    }
+
+    const signedTransaction = hubApi.checkout(options);
+
+    signedTransaction
+    .then((response) => {
+      document.getElementById('np-donate-content').innerHTML = 'Your payment is sent!<br><br>Thank you for donating.';
+    })
+    .catch((e) => {
+      console.log('Error: ', e)
+    });
+
+  }
+
 }
 
 
