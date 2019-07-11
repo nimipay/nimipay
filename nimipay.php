@@ -94,7 +94,7 @@
     }
 
 
-    // when user adds new item
+    // when user adds a new item
     if ($action == "npAddItem") {
 
         $address = $data;
@@ -114,7 +114,7 @@
     }
 
 
-    // when user adds new item
+    // when user adds a new custom item
     if ($action == "npAddItemCustom") {
 
         $data = json_decode($data, true);
