@@ -5,6 +5,10 @@
   font-family: 'Work Sans', 'Arial', 'Helvetica', sans-serif;
 }
 
+#nimipay a, #nimipay a:visited {
+  color: #479cbb;
+}
+
 .np-product {
   max-width: 130px;
   max-height: 130px;
@@ -38,7 +42,7 @@
   max-width: 430px;
   margin: 0 auto;
   text-align: center;
-  clear:both;
+  clear: both;
   padding-top: 30px;
   background-color: white;
   border-radius:5px;

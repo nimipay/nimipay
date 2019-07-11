@@ -8,10 +8,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Nimipay - Simple and Flexible Payments Gateway</title>
+    <meta name="description" content="Add Nimipay to any website and start accepting cryptocurrency, and indirectly - credit card payments, anonymously and effortlessly.">
 
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="/favicon.ico">
 
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://nimipay.com/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://nimipay.com/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://nimipay.com/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://nimipay.com/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://nimipay.com/img/favicon/safari-pinned-tab.svg" color="#333333">
+    <link rel="shortcut icon" href="https://nimipay.com/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Nimipay">
+    <meta name="application-name" content="Nimipay">
+    <meta name="msapplication-TileColor" content="#333333">
+    <meta name="msapplication-config" content="https://nimipay.com/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#333333">
+
+    <meta property="og:image:width" content="1744">
+    <meta property="og:image:height" content="913">
+    <meta property="og:title" content="Nimipay">
+    <meta property="og:description" content="Simple and Flexible Payments Gateway">
+    <meta property="og:url" content="https://nimipay.com">
+    <meta property="og:image" content="https://nimipay.com/img/logo-fb.jpg">
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@nimipay" />
+    <meta name="twitter:title" content="Nimipay" />
+    <meta name="twitter:description" content="Simple and Flexible Payments Gateway" />
+    <meta name="twitter:image" content="https://nimipay.com/img/logo-twitter.png" />
+    <meta name="twitter:image:alt" content="logo" />
 
     <style>
       body {
@@ -76,6 +103,15 @@
       }
       
     </style>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57930548-39"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-57930548-39');
+    </script>
   </head>
 <body>
   <div class="content">
@@ -175,7 +211,7 @@
       </div>
 
       <br>
-      Opens a simple UI that allows the user to enter a custom donation sum, and then make the payment. It shows a thank you message after the donation is done. See how <a href="https://setinblock.com/about" target="_blank" style="white-space: nowrap;">Set in Block</a> is utilizing NIM donations. Works without the backend.
+      Opens a simple UI that allows the user to enter a custom donation sum, and then make the payment. It shows a thank you message after the donation has been made. See how <a href="https://setinblock.com/about" target="_blank" style="white-space: nowrap;">Set in Block</a> is utilizing NIM donations. Works without the backend.
 
       <br><br><br>
       <br><br>
@@ -186,7 +222,7 @@
       Initialize Nimipay (~30 kb) on any website
       <br><br>
       <div class="my-code-container">
-        <div class="my-code">&lt;script&gt;<br>const nimAddress = 'NQ13 YOUR WALL ETAD DRES S1F9 T4L7 EA13 N7MP';<br>const nimAddressLabel = 'Your Brand Name';<br>&lt;/script&gt;<br><br>&lt;script src="https://nimipay.com/np.0.0.9.min.js"&gt;&lt;/script&gt;<br>&lt;link href="https://nimipay.com/np.0.0.9.min.css" rel="stylesheet"&gt;</div>
+        <div class="my-code">&lt;script&gt;<br>const nimAddress = 'NQ13 YOUR WALL ETAD DRES S1F9 T4L7 EA13 N7MP';<br>const nimAddressLabel = 'Your Brand Name';<br>&lt;/script&gt;<br><br>&lt;script src="https://nimipay.com/np.0.1.min.js"&gt;&lt;/script&gt;<br>&lt;link href="https://nimipay.com/np.0.1.min.css" rel="stylesheet"&gt;</div>
       </div>
       <br>
       <br>
@@ -214,7 +250,7 @@
       <br><br>
       
       <div style="line-height:180%;">
-        <span class="np-bullet">&#8226;</span> Nimipay is lightweight, less than 30 kb JS library
+        <span class="np-bullet">&#8226;</span> Nimipay is a lightweight 30 kb JS library
         <br>
         <span class="np-bullet">&bull;</span> One minute install on any website, no coding/crypto skills needed
         <br>
@@ -244,7 +280,7 @@
       Nimipay is <a href="https://github.com/giekaton/nimipay" target="_blank">open source</a> and does not charge any fees for the service.<br><br>You are welcome to <div onClick="npDonate()" title="Donate NIM" style="color:#0000ee;display:inline;cursor:pointer;"><u>Donate</u> <svg class="np-donate-logo" style="max-width:15px;padding-left:0px;padding-top:2px;" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
       <br><br>
       <br><br><br>
-      Nimipay v0.0.9
+      Nimipay v0.1
       <br>
       T&C: Use it at your own risk
       <div style="height:14px;"></div>
@@ -257,14 +293,26 @@
   </div>
 
   <script>
-    const nimAddress = "NQ13 A2VS CJUL 4PVJ 2H2D 11F9 T4L7 EA13 N7MP";
+    const nimAddress = "NQ75 9TVB 7QTH 8HUP 86E4 N0D8 A3MV NNTH JFD2";
     const nimAddressLabel = 'Nimipay';
   </script>
 
-  <!-- <link href="https://nimipay.com/np.0.0.9.min.css" rel="stylesheet">
-  <script src="https://nimipay.com/np.0.0.9.min.js"></script> -->
 
-  <link href="nimipay.css?v=001" rel="stylesheet">
+  <!--              -->
+  <!-- LIVE VERSION -->
+  <!--              -->
+  
+  <link href="https://nimipay.com/np.0.1.min.css" rel="stylesheet">
+  <script src="https://nimipay.com/np.0.1.min.js"></script>
+
+
+
+
+  <!--                     -->
+  <!-- DEVELOPMENT VERSION -->
+  <!--                     -->
+  
+  <!-- <link href="nimipay.css?v=004" rel="stylesheet">
 
   <script src="HubApi.standalone.umd.js"></script>
 
@@ -279,7 +327,9 @@
 
   <script src="reef.min.js"></script>
 
-  <script src="nimipay.js?v=001"></script>
+  <script src="nimipay.js?v=004"></script> -->
 
+
+  
 </body>
 </html>

@@ -13,6 +13,9 @@
 // https://nimiq.github.io/hub/quick-start
 
 
+// define backend url
+const npBackendUrl = 'nimipay.php';
+
 
 // Initialize the Nimiq Hub API
 const hubApi = new HubApi('https://hub.nimiq.com');
@@ -114,7 +117,7 @@ npWalletButton.onclick = function() { npWallet(); }
 function npWallet() {
   try {
 
-    const walletData = hubApi.chooseAddress({ appName: 'Nimipay' });
+    const walletData = hubApi.chooseAddress({ appName: nimAddressLabel });
     
     walletData.then(data => {
 
@@ -280,7 +283,7 @@ function npAddItemInstant(e) {
 
         let data = JSON.stringify({'address':response.raw.sender,'value':valueFiat,'tx':response.hash});
 
-        xhr.open('GET', 'nimipay.php?action=npAddItemCustom&data='+data);
+        xhr.open('GET', npBackendUrl+'?action=npAddItemCustom&data='+data);
         xhr.send();
         
       })
@@ -324,7 +327,7 @@ function npAddItem(e) {
   
     };  
 
-    xhr.open('GET', 'nimipay.php?action=npAddItem&data='+np.data.result.address);
+    xhr.open('GET', npBackendUrl+'?action=npAddItem&data='+np.data.result.address);
     xhr.send();
 
   }
@@ -335,7 +338,7 @@ function npAddItem(e) {
     // first open user's wallet and get its address
     try {
 
-      const walletData = hubApi.chooseAddress({ appName: 'Nimipay' });
+      const walletData = hubApi.chooseAddress({ appName: nimAddressLabel });
       
       walletData.then(data => {
 
@@ -364,7 +367,7 @@ function npAddItem(e) {
 
         };
 
-        xhr.open('GET', 'nimipay.php?action=npAddItem&data='+data.address);
+        xhr.open('GET', npBackendUrl+'?action=npAddItem&data='+data.address);
         xhr.send();
 
       });
@@ -518,7 +521,7 @@ function npTxBackendValidate(tx, id_invoice) {
 
   };
 
-  xhr.open('GET', 'nimipay.php?action=validateTx&data='+JSON.stringify({ tx:tx, id_invoice: id_invoice }));
+  xhr.open('GET', npBackendUrl+'?action=validateTx&data='+JSON.stringify({ tx:tx, id_invoice: id_invoice }));
   xhr.send();
 }
 
@@ -603,7 +606,7 @@ function npSendUserAddress() {
 
   };
 
-  xhr.open('GET', 'nimipay.php?action=sendUserAddress&data='+JSON.stringify(np.data.result));
+  xhr.open('GET', npBackendUrl+'?action=sendUserAddress&data='+JSON.stringify(np.data.result));
   xhr.send();
 
 }
@@ -623,6 +626,6 @@ function npSendTxHash(invoiceId, txHash) {
 
   };
 
-  xhr.open('GET', 'nimipay.php?action=sendTxHash&data='+JSON.stringify({address:np.data.result.address, invoice: invoiceId, tx:txHash}));
+  xhr.open('GET', npBackendUrl+'?action=sendTxHash&data='+JSON.stringify({address:np.data.result.address, invoice: invoiceId, tx:txHash}));
   xhr.send();
 }

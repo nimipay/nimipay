@@ -41,5 +41,5 @@ See https://nimipay.com
 - ~~Add to cart when not logged in~~
 - ~~Instant buy~~
 - ~~Donation~~
-- Shortcodes
-- Optimized final bundle
+- ~~Shortcodes~~
+- ~~Optimized final bundle~~
