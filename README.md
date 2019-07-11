@@ -4,7 +4,7 @@
 
 Nimipay creates an overlayed UI for the interaction with the user's NIM wallet, shopping cart and the items.
 
-With the help of the new [Nimiq](https://nimiq.com) Hub API, the UI allows the user to pay for invoices. Then the transaction hash is returned for the backend validation. After the transaction is confirmed, the user receives a new item. It can then be seen under Items tab.
+With the help of the new Nimiq Hub API, the UI allows the user to pay for invoices. Then the transaction hash is returned for the backend validation. After the transaction is confirmed, the user receives a new item. It can then be seen under Items tab.
 
 Being a modal window, it is shown on top of any website, and without the need to re-design the website in order to integrate a webshop.
 
