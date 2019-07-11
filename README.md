@@ -16,7 +16,7 @@ The app is experimental. Use it at your own risk.
 <br>
 <br>
 
-#### Front-end
+**Front-end** `nimipay.js`
 
 - [Reef.js](https://github.com/cferdinandi/reef) (4kb) anti-framework for reactive UI components
 - [Nimiq Hub API](https://nimiq.github.io/hub/quick-start) for simple payments processing
@@ -25,7 +25,7 @@ The total Nimipay javascript bundle is ~30 kb and a few kb of CSS.
 <br>
 <br>
 
-#### Back-end
+**Back-end** `nimipay.php`
 
 - [MeekroDB](https://meekro.com/) PHP library for simple and secure MySQL queries
 
@@ -33,19 +33,19 @@ For the database structure, use `nimipay.sql`
 <br>
 <br>
 
-#### Quickstart and examples
+**Quickstart and examples**
 
 See https://nimipay.com
 <br>
 <br>
 
-#### Issues
+**Issues**
 
 Report issues in [issue tracker](https://github.com/giekaton/nimipay/issues).
 <br>
 <br>
 
-#### Contribution
+**Contribution**
 
 Feel free to make a pull request or suggest ideas.
 <br>
