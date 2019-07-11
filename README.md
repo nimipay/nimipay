@@ -1,6 +1,6 @@
 ## Nimipay - Simple and Flexible Payments Gateway
 
-<br>
+Demo: https://nimipay.com
 
 Nimipay creates an overlayed UI for the interaction with the user's NIM wallet, shopping cart, and items.
 
