@@ -14,7 +14,7 @@ The app is experimental. Use it at your own risk.
 Front-end:
 
 - [Reef.js](https://github.com/cferdinandi/reef) (4kb) anti-framework for reactive UI components
-- [Nimiq Hub API](https://nimiq.github.io/hub/quick-start) for payments processing
+- [Nimiq Hub API](https://nimiq.github.io/hub/quick-start) for simple payments processing
 
 The total Nimipay javascript bundle is ~30 kb and a few kb of CSS.
 <br>
