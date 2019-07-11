@@ -4,11 +4,11 @@
 
 Nimipay creates an overlayed UI for the interaction with the user's NIM wallet, shopping cart, and items.
 
-It also creates a new record in the database, using the user's wallet address as the unique identifier for the user's database record.
+It also creates a new record in the database, using the user's wallet address as the unique identifier for the user's data.
 
 With the help of the new Nimiq Hub API, the UI allows the user to pay for invoices. Then the transaction hash is returned for the backend validation. After the transaction is confirmed, the user receives a new item. It can then be seen under the Items tab.
 
-Being a modal window, it is shown on top of any website, and without the need to re-design the website in order to integrate a webshop.
+Being a modal window, Nimipay is shown on top of any website, and without the need to re-design the website in order to integrate a webshop.
 
 Nimipay is all-in-one, but lightweight (~30 kb). To make it possible, some rough simplifications were made. The code is vanilla JavaScript/PHP, you can extend and customize it.
 
