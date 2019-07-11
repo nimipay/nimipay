@@ -19,7 +19,7 @@
     $data = $_GET['data'];
 
 
-    // when user logs into his wallet
+    // when user logs into a wallet
     if ($action == "sendUserAddress") {
 
         $data = json_decode($data, true);
@@ -114,7 +114,34 @@
     }
 
 
-    // when user has sent transaction
+    // when user adds new item
+    if ($action == "npAddItemCustom") {
+
+        $data = json_decode($data, true);
+        
+        $address = $data["address"];
+        $value = $data["value"];
+        $tx = $data["tx"];
+
+        $id_invoice = uniqid();
+
+        // create new invoice, write to db
+        DB::insert('nimipay_invoices', array(
+        'id_invoice' => $id_invoice,
+        'type' => 'fortune_cookie',
+        'value' => $value,
+        'tx' => $tx,
+        'address' => $address,
+        'status' => 'pending'
+        ));
+
+        echo $id_invoice;
+        exit();
+
+    }
+
+
+    // when user pings the backend that the tx was sent
     if ($action == 'sendTxHash') {
         $data = json_decode($data, true);
 

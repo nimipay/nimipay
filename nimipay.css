@@ -5,6 +5,10 @@
   font-family: 'Work Sans', 'Arial', 'Helvetica', sans-serif;
 }
 
+#nimipay a, #nimipay a:visited {
+  color: #479cbb;
+}
+
 .np-product {
   max-width: 130px;
   max-height: 130px;
@@ -13,14 +17,6 @@
   padding: 5px;
   border-radius: 5px;
   border: 1px solid gainsboro;
-}
-
-.np-donate {
-  font-size:16px;
-  font-weight:bold;
-  margin-bottom:25px;
-  height:20px;
-  cursor: pointer;
 }
 
 .np-button {
@@ -46,7 +42,7 @@
   max-width: 430px;
   margin: 0 auto;
   text-align: center;
-  clear:both;
+  clear: both;
   padding-top: 30px;
   background-color: white;
   border-radius:5px;
@@ -163,6 +159,72 @@
   padding-top: 50px;
   padding-bottom: 80px;
 }
+
+.np-donate {
+  color: white;
+  font-size:16px;
+  font-weight: normal;
+  background-color: black;
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: auto;
+  padding: 40px 15px 45px 15px;
+  width: 430px;
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  transform: translate(-50%, -51%);
+  text-align: center;
+}
+
+.np-donate-btn {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .np-donate {
+    width: 80%;
+  }
+}
+
+.np-donate-input {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  background-color: #2b3845;
+  color: white;
+  border: 1px solid #a3a3a3;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  max-width: 50%;
+}
+
+@media screen and (max-width: 460px) {
+  .np-donate-input {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .np-donate-input {
+    max-width: 75%;
+  }
+}
+
+.np-donate-input {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+      appearance: textfield;
+}
+.np-donate-input::-webkit-inner-spin-button, 
+.np-donate-input::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}
+
 
 
 /* text spinner */
