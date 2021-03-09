@@ -7,8 +7,8 @@
     <meta http-equiv="x-ua-compatible" content="ie= edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Nimipay - Simple and Flexible Payments Gateway</title>
-    <meta name="description" content="Add Nimipay to any website and start accepting cryptocurrency, and indirectly - credit card payments, anonymously and effortlessly.">
+    <title>Nimipay - Simple and Secure Crypto Payments Gateway</title>
+    <meta name="description" content="Add Nimipay to any website and start accepting cryptocurrency, and indirectly - credit card payments, in a simple and privacy-focused way.">
 
     <link rel="icon" href="/favicon.ico">
 
@@ -40,6 +40,9 @@
     <meta name="twitter:image" content="https://nimipay.com/img/logo-twitter.png" />
     <meta name="twitter:image:alt" content="logo" />
 
+    <!-- <link href="https://nimipay.com/np.0.1.min.css" rel="stylesheet"> -->
+    <link href="nimipay.css?v=006" rel="stylesheet">
+
     <style>
       body {
         font-family: 'Work Sans', 'Arial', 'Helvetica', sans-serif;
@@ -54,20 +57,39 @@
         max-width: 1100px;
         margin: 0 auto;
         padding-top: 5px;
+        position: relative;
       }
 
-      #header-left-link {
+      .floatcontainer {
+        float: right;
+      }
+
+      .floatcontainer, .social-icons {
+        width: 60px;
+      }
+
+      .header-left-link {
         float:left;
         top:15px;
         position:fixed;
       }
 
+      .social-icons {
+        float:right;
+        top:17px;
+        position:fixed;
+      }
+
       @media screen and (max-width: 900px) {
-        #header-left-link {
+        .header-left-link {
           float:left;
           position:absolute;
         }
+        .social-icons {
+          position:absolute;
+        }
       }
+
 
       .logo-wordmark {
         float:left;
@@ -102,16 +124,38 @@
         font-size: 18px;
       }
       
-    </style>
+      .np-button {
+        border-radius: 3px;
+      }
 
+      .np-space {
+        height: 100px;
+      }
+      
+    </style>
   </head>
 <body>
   <div class="content">
 
-    <div id="header-left-link">
+    <div class="header-left-link">
       <img src="img/logo.png" width="30" style="float:left;">
       <div class="logo-wordmark">
         Nimipay
+      </div>
+    </div>
+
+    <div class="floatcontainer">
+      <div class="social-icons">
+        <div style="display:inline-block;width:21px;height:21px;">
+          <a href="https://twitter.com/nimipay" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.11 124.11"><title>Twitter</title><path d="M199.05,335a62.05,62.05,0,1,0,62.05,62.05A62.05,62.05,0,0,0,199.05,335h0Zm46.81,39.49a35.82,35.82,0,0,1-10.3,2.82,18,18,0,0,0,7.88-9.92,35.93,35.93,0,0,1-11.39,4.35,17.94,17.94,0,0,0-30.55,16.35,50.9,50.9,0,0,1-37-18.74,18,18,0,0,0,5.55,23.94,17.87,17.87,0,0,1-8.12-2.24c0,0.07,0,.15,0,0.22a18,18,0,0,0,14.38,17.58,17.95,17.95,0,0,1-8.09.31A18,18,0,0,0,185,421.62,36.16,36.16,0,0,1,158.48,429,50.74,50.74,0,0,0,186,437.1c33,0,51-27.32,51-51q0-1.17-.05-2.32a36.45,36.45,0,0,0,8.94-9.28h0Z" transform="translate(-137 -335)" style="fill:#848688;fill-rule:evenodd"/></svg></a>
+          </a>
+        </div>
+        <div style="margin-left:8px;display:inline-block;width:21px;height:21px;">
+          <a href="https://github.com/nimipay/nimipay" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.11 124.11"><title>GitHub</title><path d="M411.45,335a62.06,62.06,0,0,0-19.61,120.94c3.1,0.57,4.24-1.35,4.24-3,0-1.47-.05-5.38-0.08-10.55-17.26,3.75-20.9-8.32-20.9-8.32-2.82-7.17-6.89-9.08-6.89-9.08-5.63-3.85.43-3.77,0.43-3.77,6.23,0.44,9.51,6.39,9.51,6.39,5.53,9.48,14.52,6.74,18.06,5.16,0.56-4,2.17-6.74,3.94-8.3-13.78-1.57-28.27-6.89-28.27-30.67a24,24,0,0,1,6.39-16.65c-0.64-1.57-2.77-7.88.61-16.42,0,0,5.21-1.67,17.06,6.36a58.79,58.79,0,0,1,31.07,0c11.85-8,17-6.36,17-6.36,3.39,8.54,1.26,14.85.62,16.42A23.94,23.94,0,0,1,451,393.81c0,23.84-14.51,29.08-28.33,30.62,2.22,1.91,4.21,5.7,4.21,11.49,0,8.29-.08,15-0.08,17,0,1.66,1.12,3.59,4.27,3A62.06,62.06,0,0,0,411.45,335h0Z" transform="translate(-349.4 -335)" style="fill:#848688;fill-rule:evenodd"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -120,45 +164,31 @@
 
     <div id="backup-div" style="max-width:580px;margin:0 auto;font-size:13px;text-align:center;line-height:150%;">
       
-      <h2>Simple and Flexible Payments Gateway</h2>
-      Add Nimipay to any website and start accepting cryptocurrency, and indirectly - credit card payments, anonymously and effortlessly
-      <br>
-      <br>
-      <br>
+      <h2>Simple and Secure Crypto Payments Gateway</h2>
+      Add Nimipay to any website and start accepting cryptocurrency, and indirectly credit card payments, in a simple and privacy-focused way.
+
+      <div class="np-space"></div>
+
+      <b style="font-size:16px;">Examples</b>
       <br>
       <br>
 
-      <div style="padding:20px;border:1px solid #d2d2d2;max-width:390px;border-radius:5px;margin:0 auto;">
-        <a href="https://nimipay.com/img/nimiq-paypal-metamask-comparison.png" target="_blank"><img src="img/nimiq-paypal-metamask-comparison.png" style="max-width:100%;"></a>
-      </div>
-      
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
-      <h2>Examples</h2>
-
-      Below are four examples showing different types of Nimipay integrations.
+      Below are the four examples showing different Nimipay use cases.
       <br>
       Try to open a wallet and buy some fortune cookies.
-      <br>
-      <br>
-      <br>
-      <br>
-      <br><br>
+
+      <div class="np-space"></div>
+
       <div id="np-wallet" class="np-button">Open My NIM Wallet</div>
 
       <div class="my-code-container">
         <span class="my-code">&lt;div id="np-wallet" class="np-btn"&gt;Open My NIM Wallet&lt;/div&gt;</span>
       </div>
+
       <br>
       The above code will place a button on your website that will allow the user to open his or her NIM wallet or to create a new one. It also creates a new record in the database, using user's wallet address as the unique identifier for the user's db records.
 
-      <br><br>
-      <br><br>
-      <br>
+      <div class="np-space"></div>
 
       <div class="np-product"><img src="img/fortune-cookie.jpg" style="width:100%;"></div>
       Fortune Cookie (0.01$)
@@ -172,11 +202,9 @@
       </div>
 
       <br>
-      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received. You can pass custom data for the invoice using <i>data-</i> attributes, as is being used by <a href="https://github.com/giekaton/hollow-mask" target="_blank">Hollow Mask</a>.
+      When clicked, the item's invoice will be added to the user's wallet where it can be paid for, and then the item received. You can pass custom data for the invoice using <i>data-</i> attributes.
 
-      <br><br>
-      <br><br>
-      <br>
+      <div class="np-space"></div>
 
       <div class="np-product"><img src="img/fortune-cookie.jpg" style="width:100%;"></div>
       Fortune Cookie (0.02$)
@@ -192,100 +220,79 @@
       <br>
       Single invoice, goes straight to the Nimiq checkout screen with the new invoice to pay. Returns invoice data to the backend and shows it in the user's wallet. The <i>data-</i> attributes are optional. In this case, the <i>data-value</i> attribute is used to pass a custom invoice value.
 
-      <br><br>
-      <br><br>
-      <br><br>
+      <div class="np-space"></div>
 
-      <div id="np-donate" class="np-donate-btn" title="Donate NIM">Donate <svg class="np-donate-logo" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><title>NIM</title><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
+      <div id="np-donate" class="np-donate-btn" title="Donate NIM"><span style="border-bottom:1px solid grey;">Donate</span>&nbsp;<svg class="np-donate-logo" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
 
       <div class="my-code-container">
         <span class="my-code">&lt;div id="np-donate"&gt;Donate NIM&lt;/div&gt;</span>
       </div>
 
       <br>
-      Opens a simple UI that allows the user to enter a custom donation sum, and then make the payment. It shows a thank you message after the donation has been made. See how <a href="https://setinblock.com/about" target="_blank" style="white-space: nowrap;">Set in Block</a> is utilizing NIM donations. Works without the backend.
+      Opens a simple UI that allows the user to enter a custom donation sum, and then make the payment. It shows a thank you message after the donation has been made. Works without the backend.
 
-      <br><br><br>
-      <br><br>
+      <div class="np-space"></div>
+
+      <b style="font-size:16px;">Quick Start</b>
       <br>
       <br>
-      <h2>Quick Start</h2>
-
-      Initialize Nimipay (~30 kb) on any website
-      <br><br>
+      Use the following code to initialize Nimipay (~30 kb) on any website.
+      <br>
+      <br>
       <div class="my-code-container">
         <div class="my-code">&lt;script&gt;<br>const nimAddress = 'NQ13 YOUR WALL ETAD DRES S1F9 T4L7 EA13 N7MP';<br>const nimAddressLabel = 'Your Brand Name';<br>&lt;/script&gt;<br><br>&lt;script src="https://nimipay.com/np.0.1.min.js"&gt;&lt;/script&gt;<br>&lt;link href="https://nimipay.com/np.0.1.min.css" rel="stylesheet"&gt;</div>
       </div>
       <br>
       <br>
-      Out of the box, Nimipay works client-side and without the backend. Interactions with the blockchain return data to the website, which then can be passed to the backend. See <a href="https://github.com/giekaton/nimipay/blob/master/nimipay.php" target="_blank">the source</a> of a lightweight PHP and MySQL backend used on this site.
+      Out of the box, Nimipay works client-side and without the backend. Interactions with the blockchain return data to the website, which then can be passed to the backend. See <a href="https://github.com/nimipay/nimipay/blob/master/nimipay.php" target="_blank">the source</a> of a lightweight PHP and MySQL backend used on this site.
       <br>
       <br>
-      Nimipay is open source. You can customize it to your individual needs.
-      <br>
-      <br>
-      <br><br><br><br><br><br>
-      <b style="font-size:16px;">Who is using Nimipay</b>
-      <br><br>
-      <a href="https://hollowmask.com/" target="_blank">Hollow Mask</a> is using Nimipay to power its digital collectibles ownership
-      <br>
-      <a href="https://setinblock.com/about" target="_blank">Set in Block</a> is using Nimipay to accept donations in NIM
-      <br>
-      <a href="https://cryptoclothing.cc/" target="_blank">Crypto Clothing</a> is using Nimipay for the webshop checkout process (soon)
-      <!-- <br>
-      With Nimipay, <a href="https://nimipet.com/" target="_blank">Nimipet</a> is using NIM as an in-game currency (soon) -->
-      <div id="why-nimipay"></div>
-      <br><br>
-      
-      <br><br><br><br>
+      Nimipay is <a href="https://github.com/nimipay/nimipay" target="_blank">open source</a>. You can customize it to your individual needs.
+
+      <div class="np-space"></div>
+
       <b style="font-size:16px;">Why Nimipay</b>
-      <br><br>
+      <br>
       
-      <div style="line-height:180%;">
-        <span class="np-bullet">&#8226;</span> Nimipay is a lightweight 30 kb JS library
-        <br>
-        <span class="np-bullet">&bull;</span> One minute install on any website, no coding/crypto skills needed
-        <br>
-        <span class="np-bullet">&bull;</span> Simple to create a new NIM wallet or open an existing one
-        <br>
-        <span class="np-bullet">&bull;</span> With shortcodes, it is easy to invoice your users
-        <br>
-        <span class="np-bullet">&bull;</span> Accept payments from your users in NIM cryptocurrency
-        <br>
-        <span class="np-bullet">&bull;</span> Users can use bank cards to quickly "top up" their NIM wallets
-        <br>
-        <span class="np-bullet">&bull;</span> Privacy-focused, client-side, open-source, decentralized
-        <br>
-        <span class="np-bullet">&bull;</span> Works on any device with an internet browser
-        <br>
-        <span class="np-bullet">&bull;</span> Global and borderless payments
+      <br>
+      <br>
+
+      <div style="padding:20px;border:1px solid #d2d2d2;max-width:390px;border-radius:5px;margin:0 auto;">
+        <a href="https://twitter.com/nimipay/status/1148051317451083776" target="_blank"><img src="img/nimiq-paypal-metamask-comparison.png" style="max-width:100%;"></a>
       </div>
+
+      <br>
+      <br>
+
+      Nimipay is a service that allows websites to accept payments easily, and with inherent security and privacy. It is a fully working prototype, intended to showcase the quick and simple checkout process based on the <a href="https://nimiq.com" target="_blank">Nimiq</a> blockchain.
       <br><br>
-      Nimipay is the first service that allows websites to accept payments effortlessly, and with inherent security and privacy.
-      <br><br>
-      It is possible only because it is based on <a href="https://nimiq.com" target="_blank">Nimiq</a> blockchain. The only blockchain that is in your browser and requires no installation. Nimiq is Crypto 3.0 - it provides the level of simplicity that can be intuitively grasped by any layman. Anyone can create and secure a Nimiq wallet in seconds. Furthermore, Nimiq is based on the essential cryptocurrency values and principles (security, decentralization, client-side key management, PoS).
-      <br><br>
-      Powered by the browser-based Nimiq blockchain, Nimipay allows any website to accept cryptocurrency and credit card payments effortlessly and anonymously.
+      Nimiq is the only blockchain that is in the browser and requires no installation. Nimiq is Crypto 3.0 - it provides the level of simplicity that can be intuitively grasped by any layman. Anyone can create and secure a Nimiq wallet in seconds. Furthermore, Nimiq is based on the essential cryptocurrency values and principles (security, decentralization, client-side key management, PoS).
       <br><br>
       Additionally, by giving each user a cryptocurrency wallet, custom solutions can be built on top of Nimipay, e.g. your users can deposit NIM to your website and then withdraw them. You can also pay your users by distributing affiliate earnings, airdrops, bounties, rewards, etc. NIM can be used as a currency in a virtual economy, e.g. in a browser-based game, or attached to the checkout flow in a traditional webshop.
       <br><br>
-      Nimipay is <a href="https://github.com/giekaton/nimipay/" target="_blank">open source</a> and does not charge any fees for the service.<br><br>You are welcome to <div onClick="npDonate()" title="Donate NIM" style="color:#0000ee;display:inline;cursor:pointer;"><u>Donate</u> <svg class="np-donate-logo" style="max-width:15px;padding-left:0px;padding-top:2px;" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
+      Nimipay is <a href="https://github.com/nimipay/nimipay" target="_blank">open source</a> and does not charge any fees for the service.
       <br><br>
-      <br><br><br>
+      Nimipay is brought to you by Coinwink - the app that will send you a <a href="https://coinwink.com" target="_blank">Bitcoin alert</a> when your defined conditions are met.
+      <br><br>
+      You are welcome to <div onClick="npDonate()" title="Donate NIM" style="color:#0000ee;display:inline;cursor:pointer;"><u>Donate</u> <svg class="np-donate-logo" style="max-width:15px;padding-left:0px;padding-top:2px;" viewBox="0 0 16 16"><defs><style>.np-donate-logo{fill:url(#radial-gradient);}</style><radialGradient id="radial-gradient" cx="12.02" cy="14.85" r="15.87" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ec991c"/><stop offset="1" stop-color="#e9b213"/></radialGradient></defs><path class="np-donate-logo" d="M15.82,7.34,12.49,1.66A1.34,1.34,0,0,0,11.33,1H4.67a1.34,1.34,0,0,0-1.16.66L.18,7.34a1.3,1.3,0,0,0,0,1.32l3.33,5.68A1.34,1.34,0,0,0,4.67,15h6.66a1.34,1.34,0,0,0,1.16-.66l3.33-5.68A1.3,1.3,0,0,0,15.82,7.34Z"/></svg></div>
+      <br><br>
+      <br><br>
+      <br>
       Nimipay v0.1
       <br>
       T&C: Use it at your own risk
       <div style="height:14px;"></div>
-      <a href="https://twitter.com/nimipay" target="_blank">Twitter</a>&nbsp;|&nbsp;<a href="https://github.com/giekaton/nimipay/" target="_blank">GitHub</a>
+      <a href="https://twitter.com/nimipay" target="_blank">Twitter</a>&nbsp;|&nbsp;<a href="https://github.com/nimipay/nimipay" target="_blank">GitHub</a>
       
-      <div style="height:30px;"></div>
+      <div style="height:20px;"></div>
+
       <br>
     </div>
 
   </div>
 
   <script>
-    const nimAddress = "NQ75 9TVB 7QTH 8HUP 86E4 N0D8 A3MV NNTH JFD2";
+    const nimAddress = "NQ83 ECXX SJYU TN3T 83EU DCAX 7PEH C39E 38AE";
     const nimAddressLabel = 'Nimipay';
   </script>
 
@@ -294,17 +301,13 @@
   <!-- LIVE VERSION -->
   <!--              -->
   
-  <link href="https://nimipay.com/np.0.1.min.css" rel="stylesheet">
-  <script src="https://nimipay.com/np.0.1.min.js"></script>
-
+  <!-- <script src="https://nimipay.com/np.0.1.min.js?v=002"></script> -->
 
 
 
   <!--                     -->
   <!-- DEVELOPMENT VERSION -->
   <!--                     -->
-  
-  <!-- <link href="nimipay.css?v=004" rel="stylesheet">
 
   <script src="HubApi.standalone.umd.js"></script>
 
@@ -319,7 +322,7 @@
 
   <script src="reef.min.js"></script>
 
-  <script src="nimipay.js?v=004"></script> -->
+  <script src="nimipay.js?v=007"></script>
 
 
   

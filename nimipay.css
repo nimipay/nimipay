@@ -6,7 +6,7 @@
 }
 
 #nimipay a, #nimipay a:visited {
-  color: #479cbb;
+  color: #3f8ca8;
 }
 
 .np-product {
@@ -42,7 +42,7 @@
   max-width: 430px;
   margin: 0 auto;
   text-align: center;
-  clear: both;
+  clear:both;
   padding-top: 30px;
   background-color: white;
   border-radius:5px;
@@ -178,8 +178,8 @@
 }
 
 .np-donate-btn {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: normal!important;
   margin-bottom: 25px;
   height: 20px;
   cursor: pointer;

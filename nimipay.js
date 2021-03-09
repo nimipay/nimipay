@@ -78,7 +78,7 @@ function npInvoiceStringMaker(id_invoice, value, value_nim, status, tx) {
     
     setTimeout(function(){ npTxBackendValidate(tx, id_invoice); }, 5000 + Math.random() * (20 - 5) * 1000);
   }
-  else if (stats = 'confirmed') {
+  else if (status == 'confirmed') {
     invoiceString += 'Payment received: <a href="https://nimiq.watch/#'+tx+'" target="_blank">Explore</a><br><br>';
   }
 
@@ -225,8 +225,8 @@ function npCheckoutPrepare(id_invoice) {
 npAddItemButton = document.getElementById('np-add-item');
 npAddItemButton.onclick = function(e) { npAddItem(e); };
 
-npAddItemButton = document.getElementById('np-add-item-instant');
-npAddItemButton.onclick = function(e) { npAddItemInstant(e); };
+npAddItemButtonInstant = document.getElementById('np-add-item-instant');
+npAddItemButtonInstant.onclick = function(e) { npAddItemInstant(e); };
 
 
 function npAddItemInstant(e) {

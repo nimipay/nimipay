@@ -160,7 +160,7 @@
     }
 
 
-    // when user pings the backend to check if the transaction is confirmed
+    // when user pings the backend that the tx was confirmed
     if ($action == 'validateTx') {
         $data = json_decode($data, true);
 
